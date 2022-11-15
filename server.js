@@ -5,12 +5,12 @@ const app = express();
 app.use(cookieParser());
 
 app.get('/login/:name', (req, res)  => {
-  res.cookie("name", req.params.name);
+  res.cookie("name", req.params.name).cookie("created", new Date().toISOString());
   res.status(200).send(`${req.params.name}...I have to create a cookie on your machine since you navigated here`).end();
 });
 
 app.get('/hello', (req, res)  => {
-  req.cookies.name ?  res.status(200).send(`hello ${req.cookies.name}`).end() :
+  req.cookies.name ?  res.status(200).send(`hello ${req.cookies.name}...your cookie was created at ${req.cookies.created}`).end() :
     res.status(200).send(`Looks like we don't have a cookie yet, try /login/:name`).end()
 });
 
