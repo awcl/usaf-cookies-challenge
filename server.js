@@ -32,7 +32,7 @@ app.get('/logout', (req, res)  => {
 });
 
 app.get('*', function (req, res) {
-  res.status(404).send(`404: Try /login/:name or /hello instead of here, please`);
+  res.status(404).send(`404: You tried navigating to a path that doesn't exist...Valid paths: login/:name, /hello, and /logout`);
 });
 
 app.listen(3334, () => {});
