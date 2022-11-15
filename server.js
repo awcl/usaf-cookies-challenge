@@ -19,13 +19,13 @@ app.get('/login/:name', (req, res)  => {
 
 app.get('/hello', (req, res)  => {
   req.cookies.name ?  res.status(200).send(`hello ${req.cookies.name}...your cookie was created at ${req.cookies.created}`).end() :
-    res.status(401).send(`Looks like you're not signed in, try /login/:name`).end()
+    res.status(401).send(`Looks like you're not signed in...try /login/:name`).end()
 });
 
 app.get('/logout', (req, res)  => {
-  if (req.cookies.name)  {
+  if (req.cookies.name || req.cookies.created)  {
     res.clearCookie('name').clearCookie('created');
-    res.status(200).send(`You've been signed out, ${req.cookies.name}`).end();
+    res.status(200).send(`You've been signed out`).end();
   } else {
     res.status(401).send(`You weren't signed in 👀`).end();
   }
